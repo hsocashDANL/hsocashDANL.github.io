@@ -1,5 +1,5 @@
 ---
-title: "YOUR NAME" 
+title: "Henry Socash" 
 about:
   template: trestles  # jolla  trestles  solana  marquee  broadside
   image: img/profile.png
@@ -9,33 +9,33 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
-    - icon: instagram
-      text: Instagram
-      href: https://instagram.com
+      href: https://www.linkedin.com/in/henry-socash-0646592a2/
+  
     - icon: github
       text: GitHub
-      href: https://github.com
+      href: https://github.com/hsocashDANL
     - icon: file-earmark-pdf
       text: Resumé
-      href: https://GITHUB_USERNAME.github.io/resume-example.pdf
+      href: https://hsocashDANL.github.io/resume.pdf
     - icon: mailbox
       text: Email
-      href: mailto:YOUR_EMAIL@geneseo.edu
+      href: mailto:hs31@geneseo.edu
 
 ---
 
 
-Finley Malloc majors in Data Analytics at SUNY Geneseo. When not working on data analytics, Finley enjoys spending time unicycling and playing with her pet iguana.
+Henry Socash majors in Communications at SUNY Geneseo. When not working on schoolwork, Henry enjoys spending time skiing and listening to music from Westside Gunn
 
 ## Education
+Monroe Community College | Brighton, Ny
+Associates in science: liberal arts 
 
 State University of New York at Geneseo | Geneseo, NY <br>
-B.S. in Data Analytics | Aug 2022 - May 2026 <br>
-Minor in Business Administration 
+B.S. in communications | Sep 2023 - current <br>
+Minor in Business studies 
 
-## Experience
 
-Starbucks Analytics | Data Analyst Intern | May 2024 - Aug 2024
+
+
 
 

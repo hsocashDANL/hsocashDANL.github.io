@@ -2,7 +2,7 @@
 title: DANL Project
 subtitle: "Data-Driven Mastery: Unlocking Business Potential"
 author: 
-  - Name 1
+  - Henry Socash 
   - Name 2
   - Name 3
   - Name 4
@@ -48,45 +48,70 @@ theme_set(theme_ipsum()+
 # Introduction
 
 About this project :clap:
+-we will be observing how Magnitude varies by Depth, Location, and Time of day for the earthquakes recorded in 2023 
 
 ```{r}
-1 + 1
+eq <- read_csv('C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv')
 ```
 
 
 # Data
 
-The data.frame `mpg` contains a subset of the fuel economy data that the EPA makes available on [https://fueleconomy.gov/](https://fueleconomy.gov/). It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car. :oncoming_automobile:
-
-
-## Summary Statistics
-
-```{r}
-mpg <- ggplot2::mpg
-```
-
+this data set contains information about all earthquakes that occurred in 2023, displaying magnitude, location, depth, and time of the event. 
 ```{r}
 #| results: asis
 #| echo: false
-rmarkdown::paged_table(mpg) 
+rmarkdown::paged_table(eq)
 ```
 
+## Summary Statistics
 
+Here are some summary statistics of the numeric variables in this dataset. 
+Depth is measured in Kilometers and Magnitude is measured on the Richter
 ```{r}
-skim(mpg) %>% 
-  select(-n_missing)
+eq1 <- eq %>% select(Magnitude,Depth)
+skim(eq1)
 ```
 
+
+## Exploratory Data Analysis 
+
+here shows top ten regions and countries that experienced the most eathquakes in 2023
+```{r}
+quaked <- earthquake %>% 
+  group_by(Country , Lands) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=10) %>% 
+  head(quaked, n = 10)
+```
+## more exploratory data analysis
+
+here is a data set showing the months where the most earthquakes took place 
+```{r}
+earthquake$Month <- rowSums(earthquake[,4:5])
+earthquake$Month[1:6055] <- "NOVEMBER"
+earthquake$Month[6056:14543] <- "OCTOBER"
+earthquake$Month[14544:23404] <- "SEPTEMBER"
+earthquake$Month[23405:31631] <- "AUGUST"
+earthquake$Month[31632:40673] <- "JULY"
+earthquake$Month[40674:48647] <- "JUNE"
+earthquake$Month[48648:53539] <- "MAY"
+
+densemonth <- earthquake %>% 
+  group_by(Month) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=7)
+
+```
 
 ## MPG and a Type of Cars
 The following boxplot shows how the distribution of highway MPG (`hwy`) varies by a type of cars (`class`) :blue_car: :truck: :minibus:.
 
 
 ```{r}
-ggplot(data = mpg) +
-  geom_boxplot(aes(x = class, y = hwy, fill = class),
-               show.legend = F) +
-  labs(x = "Class", y = "Highway\nMPG") 
+
 ```
 
 
