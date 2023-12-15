@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henry Socash">
-<meta name="author" content="Name 2">
-<meta name="author" content="Name 3">
-<meta name="author" content="Name 4">
-<meta name="author" content="Name 5">
+<meta name="author" content="Alban Kuka">
+<meta name="author" content="Victoria Pavlock">
+<meta name="author" content="Jackson Boyer">
+<meta name="author" content="Jeremy Sun">
 
 <title>Henry Socash DANL - DANL Project</title>
 <style>
@@ -153,7 +153,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2.1</span> Summary Statistics</a></li>
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">2.2</span> Exploratory Data Analysis</a></li>
-  <li><a href="#mpg-and-a-type-of-cars" id="toc-mpg-and-a-type-of-cars" class="nav-link" data-scroll-target="#mpg-and-a-type-of-cars"><span class="header-section-number">2.3</span> MPG and a Type of Cars</a></li>
+  <li><a href="#more-exploratory-data-analysis" id="toc-more-exploratory-data-analysis" class="nav-link" data-scroll-target="#more-exploratory-data-analysis"><span class="header-section-number">2.3</span> more exploratory data analysis</a></li>
+  <li><a href="#proportion-of-earthquakes-per-month-per-country" id="toc-proportion-of-earthquakes-per-month-per-country" class="nav-link" data-scroll-target="#proportion-of-earthquakes-per-month-per-country"><span class="header-section-number">2.4</span> proportion of earthquakes per month, per country</a></li>
+  <li><a href="#why-is-this-important" id="toc-why-is-this-important" class="nav-link" data-scroll-target="#why-is-this-important"><span class="header-section-number">2.5</span> why is this important?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -175,10 +177,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
              <p>Henry Socash </p>
-             <p>Name 2 </p>
-             <p>Name 3 </p>
-             <p>Name 4 </p>
-             <p>Name 5 </p>
+             <p>Alban Kuka </p>
+             <p>Victoria Pavlock </p>
+             <p>Jackson Boyer </p>
+             <p>Jeremy Sun </p>
           </div>
   </div>
     
@@ -193,12 +195,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>About this project <span class="emoji" data-emoji="clap">👏</span> -we will be observing how Magnitude varies by Depth, Location, and Time of day for the earthquakes recorded in 2023</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>eq <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>earthquake <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Data</h1>
-<p>this data set contains information about all earthquakes that occurred in 2023, displaying magnitude, location, depth, and time of the event.</p>
+<p>this data set, according to its Kaggle Description, which can be found at https://www.kaggle.com/datasets/syedanwarafridi/earthquake-events-worldwide-2023?rvi=1 is “a comprehensive catalog capturing seismic activity from January 1, 2023, to December 31, 2023. This dataset provides a detailed record of earthquakes globally, including crucial information such as date and time, geographic coordinates, depth, magnitude, and the affected region’s land type and country”</p>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
@@ -211,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.1" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">2.1</span> Summary Statistics</h2>
 <p>Here are some summary statistics of the numeric variables in this dataset. Depth is measured in Kilometers and Magnitude is measured on the Richter</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>eq1 <span class="ot">&lt;-</span> eq <span class="sc">%&gt;%</span> <span class="fu">select</span>(Magnitude,Depth)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>eq1 <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> <span class="fu">select</span>(Magnitude,Depth)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(eq1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -315,10 +317,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exploratory-data-analysis" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">2.2</span> Exploratory Data Analysis</h2>
+<p>here shows top ten regions and countries that experienced the most earthquakes in 2023</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>quaked <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country , Lands) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(quaked, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>as we can see Turkey is head and shoulders above other countries with three separate regions of the same country all making the top 10 most quaked country/region generally we can see that the most common places for earthquakes to occur are around the Mediterranean and south american coast</p>
 </section>
-<section id="mpg-and-a-type-of-cars" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="mpg-and-a-type-of-cars"><span class="header-section-number">2.3</span> MPG and a Type of Cars</h2>
-<p>The following boxplot shows how the distribution of highway MPG (<code>hwy</code>) varies by a type of cars (<code>class</code>) <span class="emoji" data-emoji="blue_car">🚙</span> <span class="emoji" data-emoji="truck">🚚</span> <span class="emoji" data-emoji="minibus">🚐</span>.</p>
+<section id="more-exploratory-data-analysis" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="more-exploratory-data-analysis"><span class="header-section-number">2.3</span> more exploratory data analysis</h2>
+<p>here is a data set showing the months where the most earthquakes took place</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(earthquake[,<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">1</span><span class="sc">:</span><span class="dv">6055</span>] <span class="ot">&lt;-</span> <span class="st">"NOVEMBER"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">6056</span><span class="sc">:</span><span class="dv">14543</span>] <span class="ot">&lt;-</span> <span class="st">"OCTOBER"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">14544</span><span class="sc">:</span><span class="dv">23404</span>] <span class="ot">&lt;-</span> <span class="st">"SEPTEMBER"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">23405</span><span class="sc">:</span><span class="dv">31631</span>] <span class="ot">&lt;-</span> <span class="st">"AUGUST"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">31632</span><span class="sc">:</span><span class="dv">40673</span>] <span class="ot">&lt;-</span> <span class="st">"JULY"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">40674</span><span class="sc">:</span><span class="dv">48647</span>] <span class="ot">&lt;-</span> <span class="st">"JUNE"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">48648</span><span class="sc">:</span><span class="dv">53539</span>] <span class="ot">&lt;-</span> <span class="st">"MAY"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>densemonth <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="proportion-of-earthquakes-per-month-per-country" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="proportion-of-earthquakes-per-month-per-country"><span class="header-section-number">2.4</span> proportion of earthquakes per month, per country</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dense <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month,Country,Lands) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">7</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(dense, <span class="at">n=</span><span class="dv">15</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dense,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Month,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> Country)) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>we can see that most countries sporadically receive earthquakes around the year, whereas Turkeys threat of an earthquake remains constant year round.</p>
+</section>
+<section id="why-is-this-important" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="why-is-this-important"><span class="header-section-number">2.5</span> why is this important?</h2>
+<p>this data can be helpful for anyone wishing to visit some of the more frequently earth quaked countries, wanting to know when the safest time of year to vacation is. Understanding where and when earthquakes appear can also be helpful for understanding more about the causes of earthquakes and possibly how they can be avoided.</p>
 
 
 </section>

@@ -3,10 +3,10 @@ title: DANL Project
 subtitle: "Data-Driven Mastery: Unlocking Business Potential"
 author: 
   - Henry Socash 
-  - Name 2
-  - Name 3
-  - Name 4
-  - Name 5
+  - Alban Kuka
+  - Victoria Pavlock
+  - Jackson Boyer
+  - Jeremy Sun
 
 toc: true
 toc-title: "Table of Contents"
@@ -51,32 +51,32 @@ About this project :clap:
 -we will be observing how Magnitude varies by Depth, Location, and Time of day for the earthquakes recorded in 2023 
 
 ```{r}
-eq <- read_csv('C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv')
+earthquake <- read_csv('C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv')
 ```
 
 
 # Data
 
-this data set contains information about all earthquakes that occurred in 2023, displaying magnitude, location, depth, and time of the event. 
+this data set, according to its Kaggle Description, which can be found at https://www.kaggle.com/datasets/syedanwarafridi/earthquake-events-worldwide-2023?rvi=1 is "a comprehensive catalog capturing seismic activity from January 1, 2023, to December 31, 2023. This dataset provides a detailed record of earthquakes globally, including crucial information such as date and time, geographic coordinates, depth, magnitude, and the affected region's land type and country"
 ```{r}
 #| results: asis
 #| echo: false
-rmarkdown::paged_table(eq)
+rmarkdown::paged_table(earthquake)
 ```
 
 ## Summary Statistics
 
-Here are some summary statistics of the numeric variables in this dataset. 
+ Here are some summary statistics of the numeric variables in this dataset. 
 Depth is measured in Kilometers and Magnitude is measured on the Richter
 ```{r}
-eq1 <- eq %>% select(Magnitude,Depth)
+eq1 <- earthquake %>% select(Magnitude,Depth)
 skim(eq1)
 ```
 
 
 ## Exploratory Data Analysis 
 
-here shows top ten regions and countries that experienced the most eathquakes in 2023
+ here shows top ten regions and countries that experienced the most earthquakes in 2023
 ```{r}
 quaked <- earthquake %>% 
   group_by(Country , Lands) %>% 
@@ -85,9 +85,13 @@ quaked <- earthquake %>%
   filter(row_number() <=10) %>% 
   head(quaked, n = 10)
 ```
+ as we can see Turkey is head and shoulders above other countries with three separate regions of the same country all making the top 10 most quaked country/region
+ generally we can see that the most common places for earthquakes to occur are around the Mediterranean and south american coast 
+
+
 ## more exploratory data analysis
 
-here is a data set showing the months where the most earthquakes took place 
+ here is a data set showing the months where the most earthquakes took place 
 ```{r}
 earthquake$Month <- rowSums(earthquake[,4:5])
 earthquake$Month[1:6055] <- "NOVEMBER"
@@ -106,12 +110,23 @@ densemonth <- earthquake %>%
 
 ```
 
-## MPG and a Type of Cars
-The following boxplot shows how the distribution of highway MPG (`hwy`) varies by a type of cars (`class`) :blue_car: :truck: :minibus:.
-
+## proportion of earthquakes per month, per country 
 
 ```{r}
-
+dense <- earthquake %>% 
+  group_by(Month,Country,Lands) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=7) %>% 
+  head(dense, n=15)
+ggplot(dense,
+       aes(y = Month,
+           fill = Country)) +
+  geom_bar(show.legend = T)
 ```
+we can see that most countries sporadically receive earthquakes around the year, whereas Turkeys threat of an earthquake remains constant year round.
 
+## why is this important?
 
+this data can be helpful for anyone wishing to visit some of the more frequently earth quaked countries, wanting to know when the safest time of year to vacation is.
+Understanding where and when earthquakes appear can also be helpful for understanding more about the causes of earthquakes and possibly how they can be avoided.

@@ -102,14 +102,14 @@
     "href": "project.html",
     "title": "DANL Project",
     "section": "",
-    "text": "About this project 👏 -we will be observing how Magnitude varies by Depth, Location, and Time of day for the earthquakes recorded in 2023\n\neq &lt;- read_csv('C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv')"
+    "text": "About this project 👏 -we will be observing how Magnitude varies by Depth, Location, and Time of day for the earthquakes recorded in 2023\n\nearthquake &lt;- read_csv('C:/Users/hsoca/OneDrive/Desktop/earthquake data.csv')"
   },
   {
     "objectID": "project.html#summary-statistics",
     "href": "project.html#summary-statistics",
     "title": "DANL Project",
     "section": "2.1 Summary Statistics",
-    "text": "2.1 Summary Statistics\nHere are some summary statistics of the numeric variables in this dataset. Depth is measured in Kilometers and Magnitude is measured on the Richter\n\neq1 &lt;- eq %&gt;% select(Magnitude,Depth)\nskim(eq1)\n\n\nData summary\n\n\nName\neq1\n\n\nNumber of rows\n53539\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nMagnitude\n0\n1\n2.96\n0.89\n-0.7\n2.3\n2.9\n3.5\n7.7\n▁▆▇▁▁\n\n\nDepth\n0\n1\n35.80\n67.58\n-4.0\n6.0\n10.0\n32.0\n750.0\n▇▁▁▁▁"
+    "text": "2.1 Summary Statistics\nHere are some summary statistics of the numeric variables in this dataset. Depth is measured in Kilometers and Magnitude is measured on the Richter\n\neq1 &lt;- earthquake %&gt;% select(Magnitude,Depth)\nskim(eq1)\n\n\nData summary\n\n\nName\neq1\n\n\nNumber of rows\n53539\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nMagnitude\n0\n1\n2.96\n0.89\n-0.7\n2.3\n2.9\n3.5\n7.7\n▁▆▇▁▁\n\n\nDepth\n0\n1\n35.80\n67.58\n-4.0\n6.0\n10.0\n32.0\n750.0\n▇▁▁▁▁"
   },
   {
     "objectID": "project.html#mpg-and-a-type-of-cars",
@@ -130,6 +130,27 @@
     "href": "project.html#exploratory-data-analysis",
     "title": "DANL Project",
     "section": "2.2 Exploratory Data Analysis",
-    "text": "2.2 Exploratory Data Analysis"
+    "text": "2.2 Exploratory Data Analysis\nhere shows top ten regions and countries that experienced the most earthquakes in 2023\n\nquaked &lt;- earthquake %&gt;% \n  group_by(Country , Lands) %&gt;% \n  summarize(count =n()) %&gt;% \n  arrange(desc(count)) %&gt;% \n  filter(row_number() &lt;=10) %&gt;% \n  head(quaked, n = 10)\n\nas we can see Turkey is head and shoulders above other countries with three separate regions of the same country all making the top 10 most quaked country/region generally we can see that the most common places for earthquakes to occur are around the Mediterranean and south american coast"
+  },
+  {
+    "objectID": "project.html#more-exploratory-data-analysis",
+    "href": "project.html#more-exploratory-data-analysis",
+    "title": "DANL Project",
+    "section": "2.3 more exploratory data analysis",
+    "text": "2.3 more exploratory data analysis\nhere is a data set showing the months where the most earthquakes took place\n\nearthquake$Month &lt;- rowSums(earthquake[,4:5])\nearthquake$Month[1:6055] &lt;- \"NOVEMBER\"\nearthquake$Month[6056:14543] &lt;- \"OCTOBER\"\nearthquake$Month[14544:23404] &lt;- \"SEPTEMBER\"\nearthquake$Month[23405:31631] &lt;- \"AUGUST\"\nearthquake$Month[31632:40673] &lt;- \"JULY\"\nearthquake$Month[40674:48647] &lt;- \"JUNE\"\nearthquake$Month[48648:53539] &lt;- \"MAY\"\n\ndensemonth &lt;- earthquake %&gt;% \n  group_by(Month) %&gt;% \n  summarize(count =n()) %&gt;% \n  arrange(desc(count)) %&gt;% \n  filter(row_number() &lt;=7)"
+  },
+  {
+    "objectID": "project.html#proportion-of-earthquakes-per-month-per-country",
+    "href": "project.html#proportion-of-earthquakes-per-month-per-country",
+    "title": "DANL Project",
+    "section": "2.4 proportion of earthquakes per month, per country",
+    "text": "2.4 proportion of earthquakes per month, per country\n\ndense &lt;- earthquake %&gt;% \n  group_by(Month,Country,Lands) %&gt;% \n  summarize(count =n()) %&gt;% \n  arrange(desc(count)) %&gt;% \n  filter(row_number() &lt;=7) %&gt;% \n  head(dense, n=15)\nggplot(dense,\n       aes(y = Month,\n           fill = Country)) +\n  geom_bar(show.legend = T)\n\n\n\n\nwe can see that most countries sporadically receive earthquakes around the year, whereas Turkeys threat of an earthquake remains constant year round."
+  },
+  {
+    "objectID": "project.html#why-is-this-important",
+    "href": "project.html#why-is-this-important",
+    "title": "DANL Project",
+    "section": "2.5 why is this important?",
+    "text": "2.5 why is this important?\nthis data can be helpful for anyone wishing to visit some of the more frequently earth quaked countries, wanting to know when the safest time of year to vacation is. Understanding where and when earthquakes appear can also be helpful for understanding more about the causes of earthquakes and possibly how they can be avoided."
   }
 ]
